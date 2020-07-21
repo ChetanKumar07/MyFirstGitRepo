@@ -28,7 +28,7 @@ node {
      // }
       stage('Copy requiredfile to deployment'){
         sshagent(['jenkins-ssh-to-root-user1']){
-            sh "ssh -o StrictHostKeyChecking=no root@18.191.137.33"
+            sh "ssh -o -tt StrictHostKeyChecking=no root@18.191.137.33"
             sh "scp -r /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war root@172.31.3.10:/opt/Tomcat/apache-tomcat-9/webapps"
         }
     }
