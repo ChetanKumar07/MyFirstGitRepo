@@ -31,5 +31,10 @@ node {
             sh "ssh -o StrictHostKeyChecking=no root@13.127.153.110"
             sh "scp -r /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war root@13.127.153.110:/root/opt/Tomcat/apache-tomcat-9/webapps"
         }
+        
+      stage('Copy the artifacts to s3'){
+          withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'uploadtos3', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+          sh "/usr/local/bin/aws s3 cp /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war s3://dubbs3/"
+        }
     }
  }
