@@ -23,13 +23,13 @@ node {
    }
    // stage ('deploy'){
    // echo 'deployment started'
-      // sh "scp /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war root@13.127.153.110:/opt/Tomcat/apache-tomcat-9/webapps"
+      // sh "scp /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war root@172.31.3.10:/opt/Tomcat/apache-tomcat-9/webapps"
       
      // }
       stage('Copy requiredfile to deployment'){
         sshagent(['jenkins-ssh-to-root-user1']){
             sh "ssh -o StrictHostKeyChecking=no root@18.191.137.33"
-            sh "scp -r /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war root@13.127.153.110:/opt/Tomcat/apache-tomcat-9/webapps"
+            sh "scp -r /var/lib/jenkins/workspace/${JOB_NAME}/target/*.war root@172.31.3.10:/opt/Tomcat/apache-tomcat-9/webapps"
         }
     }
  }
